@@ -83,18 +83,19 @@ node[:deploy].each do |application, deploy|
       end
     end
 
-    template "#{monit_conf_dir}/sidekiq_#{application}.monitrc" do
-      mode 0644
-      source "sidekiq_monitrc.erb"
-      variables({
-        :deploy => deploy,
-        :application => application,
-        :workers => workers,
-        :syslog_ident => node[:sidekiq][application][:syslog_ident],
-        :syslog => node[:sidekiq][application][:syslog]
-      })
-      notifies :reload, resources(:service => "monit"), :immediately
-    end
+    # Comment monit configuration for sidekiq control
+    #template "#{monit_conf_dir}/sidekiq_#{application}.monitrc" do
+    #  mode 0644
+    #  source "sidekiq_monitrc.erb"
+    #  variables({
+    #    :deploy => deploy,
+    #    :application => application,
+    #    :workers => workers,
+    #    :syslog_ident => node[:sidekiq][application][:syslog_ident],
+    #    :syslog => node[:sidekiq][application][:syslog]
+    #  })
+    #  notifies :reload, resources(:service => "monit"), :immediately
+    #end
 
   end
 end
