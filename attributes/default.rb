@@ -7,7 +7,7 @@ node[:deploy].each do |application, deploy|
     next
   end
   default[:sidekiq][application.intern] = {}
-  default[:sidekiq][application.intern][:restart_command] = "sudo monit restart -g sidekiq_#{application}_group"
+  default[:sidekiq][application.intern][:restart_command] = "sudo /sbin/restart workers"
   default[:sidekiq][application.intern][:syslog] = false
   default[:sidekiq][application.intern][:syslog_ident] = nil
 end
